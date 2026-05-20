@@ -49,6 +49,7 @@
                       <span class="sr-only">(current)</span>
                     </a>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="/booking" style="padding: 8px 20px; margin-left: 10px;">booking</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="/login" style="padding: 8px 20px; margin-left: 10px;">Login</a></li>
 

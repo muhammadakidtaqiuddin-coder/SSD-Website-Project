@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin Dashboard | Car Rental</title>
+    <title>Users Info| Car Rental</title>
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
@@ -97,7 +97,7 @@
 <!-- Main Content -->
 <div class="main-content">
     <div class="topbar">
-        <h5>Dashboard</h5>
+        <h5>Users Info</h5>
         <span style="font-size:14px; color:#888;">Welcome, {{ auth()->user()->name }}</span>
     </div>
 
@@ -106,40 +106,11 @@
     @endif
 
     <!-- Stats -->
-    <div class="row mb-4">
-        <div class="col-md-4 mb-3">
-            <div class="stat-card d-flex justify-content-between align-items-center">
-                <div>
-                    <h3>{{ $totalUsers }}</h3>
-                    <p>Total Users</p>
-                </div>
-                <i class="fa fa-users"></i>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="stat-card d-flex justify-content-between align-items-center">
-                <div>
-                    <h3>{{ $totalBookings }}</h3>
-                    <p>Total Bookings</p>
-                </div>
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="stat-card d-flex justify-content-between align-items-center">
-                <div>
-                    <h3>{{ $pendingBookings }}</h3>
-                    <p>Pending Bookings</p>
-                </div>
-                <i class="fa fa-clock"></i>
-            </div>
-        </div>
-    </div>
 
-    <!-- Recent Bookings -->
+    <!-- Users -->
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <span>Recent Bookings</span>
+            <span>Users</span>
             <a href="{{ route('admin.bookings') }}" style="font-size:13px; color:#f5a425;">View All</a>
         </div>
         <div class="card-body p-0">
@@ -148,26 +119,26 @@
                     <tr>
                         <th>ID</th>
                         <th>User</th>
-                        <th>Car</th>
-                        <th>Pickup</th>
-                        <th>Return</th>
-                        <th>Price</th>
-                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Created At</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($recentBookings as $booking)
+                    @forelse($users as $user)
                     <tr>
-                        <td>#{{ $booking->id }}</td>
-                        <td>{{ $booking->user->name ?? 'N/A' }}</td>
-                        <td>{{ $booking->car_name }}</td>
-                        <td>{{ $booking->pickup_date->format('d M Y') }}</td>
-                        <td>{{ $booking->return_date->format('d M Y') }}</td>
-                        <td>${{ number_format($booking->total_price, 2) }}</td>
-                        <td><span class="badge badge-{{ $booking->status }}">{{ ucfirst($booking->status) }}</span></td>
+                        <td>#{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ ucfirst($user->role) }}</td>
+                        <td>{{ $user->created_at->format('d M Y') }}</td>
                     </tr>
                     @empty
-                    <tr><td colspan="7" class="text-center text-muted py-3">No bookings yet.</td></tr>
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-3">
+                            No users found.
+                        </td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>

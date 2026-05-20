@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     // List user's bookings
     public function index()
@@ -20,7 +16,7 @@ class BookingController extends Controller
         $bookings = Booking::where('user_id', Auth::id())
                            ->orderBy('created_at', 'desc')
                            ->get();
-        return view('bookings.index', compact('bookings'));
+        return view('booking', compact('bookings'));
     }
 
     // Show create form

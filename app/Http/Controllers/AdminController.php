@@ -9,15 +9,20 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function __construct()
+   /* public function __construct()
     {
         $this->middleware(['auth', 'admin']);
-    }
+    }*/
+
+    /*public function dashboard()
+    {
+        return view('admin.dashboard');
+    }*/
 
     // Admin dashboard
     public function dashboard()
     {
-        $totalUsers    = User::where('role', 'user')->count();
+        $totalUsers    = User::count();
         $totalBookings = Booking::count();
         $pendingBookings = Booking::where('status', 'pending')->count();
         $recentBookings  = Booking::with('user')->orderBy('created_at', 'desc')->take(5)->get();
@@ -32,10 +37,27 @@ class AdminController extends Controller
 
     // View all bookings
     public function bookings()
-    {
-        $bookings = Booking::with('user')->orderBy('created_at', 'desc')->get();
-        return view('admin.bookings', compact('bookings'));
-    }
+{
+    $bookings = Booking::with('user')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    $totalUsers = User::where('role', 'user')->count();
+    $totalBookings = Booking::count();
+    $pendingBookings = Booking::where('status', 'pending')->count();
+    $recentBookings = Booking::with('user')
+        ->orderBy('created_at', 'desc')
+        ->take(5)
+        ->get();
+
+    return view('admin.bookings', compact(
+        'bookings',
+        'totalUsers',
+        'totalBookings',
+        'pendingBookings',
+        'recentBookings'
+    ));
+}
 
     // Update booking status
     public function updateBookingStatus(Request $request, Booking $booking)
@@ -57,10 +79,26 @@ class AdminController extends Controller
 
     // View all users
     public function users()
-    {
-        $users = User::orderBy('created_at', 'desc')->get();
-        return view('admin.users', compact('users'));
-    }
+{
+    $users = User::orderBy('created_at', 'desc')->get();
+
+    $totalUsers = User::where('role', 'user')->count();
+    $totalBookings = Booking::count();
+    $pendingBookings = Booking::where('status', 'pending')->count();
+
+    $recentBookings = Booking::with('user')
+        ->latest()
+        ->take(5)
+        ->get();
+
+    return view('admin.users', compact(
+        'users',
+        'totalUsers',
+        'totalBookings',
+        'pendingBookings',
+        'recentBookings'
+    ));
+}
 
     // View audit logs
     public function auditLogs()
