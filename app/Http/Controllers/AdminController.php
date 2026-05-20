@@ -42,7 +42,6 @@ class AdminController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
-    $totalUsers = User::where('role', 'user')->count();
     $totalBookings = Booking::count();
     $pendingBookings = Booking::where('status', 'pending')->count();
     $recentBookings = Booking::with('user')
