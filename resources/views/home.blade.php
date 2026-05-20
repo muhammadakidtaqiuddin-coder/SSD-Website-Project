@@ -10,7 +10,7 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>PHPJabbers.com | Free Car Rental Website Template</title>
+    <title>SSD | Car Rental Website Template</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -43,32 +43,16 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home
                       <span class="sr-only">(current)</span>
                     </a>
                 </li>
 
-                <li class="nav-item"><a class="nav-link" href="/fleet">Fleet</a></li>
-                <li class="nav-item"><a class="nav-link" href="/offers">Offers</a></li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="/blog">Blog</a>
-                      <a class="dropdown-item" href="/team">Team</a>
-                      <a class="dropdown-item" href="/testimonials">Testimonials</a>
-                      <a class="dropdown-item" href="/terms">Terms</a>
-                    </div>
-                </li>
-
-                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
-
-                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
-
                 <li class="nav-item"><a class="nav-link" href="/login" style="padding: 8px 20px; margin-left: 10px;">Login</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="#" onclick="handleLogout(event)" style="padding: 8px 20px; margin-left: 10px;">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -331,5 +315,51 @@
     <!-- Additional Scripts -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/owl.js') }}"></script>
+
+    <script>
+        function handleLogout(e) {
+            e.preventDefault();
+
+            // Clear client-side storage
+            localStorage.clear();
+            sessionStorage.clear();
+
+            // Submit a POST request to Laravel's logout route (requires CSRF token)
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/logout';
+
+            const csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = '_token';
+            csrfToken.value = '{{ csrf_token() }}';
+
+            form.appendChild(csrfToken);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+
   </body>
 </html>
+
+
+<!--
+                <li class="nav-item"><a class="nav-link" href="/fleet">Fleet</a></li>
+                <li class="nav-item"><a class="nav-link" href="/offers">Offers</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="/blog">Blog</a>
+                      <a class="dropdown-item" href="/team">Team</a>
+                      <a class="dropdown-item" href="/testimonials">Testimonials</a>
+                      <a class="dropdown-item" href="/terms">Terms</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+-->
