@@ -10,7 +10,7 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Car Rental | Login</title>
+    <title>Car Rental | Forgot Password</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -88,61 +88,44 @@
         border-radius: 6px;
         margin-top: 10px;
         display: block;
+        background-color: #f5a425;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        transition: background-color 0.3s;
       }
 
-      .login-box .forgot-link {
-        font-size: 13px;
-        color: #f5a425;
-        text-decoration: none;
-        float: right;
-        margin-top: 6px;
+      .login-box .filled-button:hover {
+        background-color: #e09415;
       }
 
-      .login-box .forgot-link:hover {
-        text-decoration: underline;
-      }
-
-      .login-box .divider {
-        text-align: center;
-        margin: 20px 0;
-        color: #aaa;
-        font-size: 13px;
-        position: relative;
-      }
-
-      .login-box .divider::before,
-      .login-box .divider::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        width: 42%;
-        height: 1px;
-        background: #ddd;
-      }
-
-      .login-box .divider::before { left: 0; }
-      .login-box .divider::after { right: 0; }
-
-      .login-box .register-link {
+      .login-box .back-link {
         text-align: center;
         font-size: 14px;
         margin-top: 20px;
         color: #666;
       }
 
-      .login-box .register-link a {
+      .login-box .back-link a {
         color: #f5a425;
         font-weight: 600;
         text-decoration: none;
       }
 
-      .login-box .register-link a:hover {
+      .login-box .back-link a:hover {
         text-decoration: underline;
       }
 
       .login-box .alert {
         font-size: 13px;
         border-radius: 6px;
+      }
+
+      .hint-text {
+        font-size: 13px;
+        color: #aaa;
+        margin-top: 5px;
       }
     </style>
 
@@ -173,6 +156,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="/fleet">Fleet</a></li>
+                <li class="nav-item"><a class="nav-link" href="/offers">Offers</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="/blog">Blog</a>
+                      <a class="dropdown-item" href="/team">Team</a>
+                      <a class="dropdown-item" href="/testimonials">Testimonials</a>
+                      <a class="dropdown-item" href="/terms">Terms</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/login">Login</a></li>
             </ul>
           </div>
@@ -180,15 +178,15 @@
       </nav>
     </header>
 
-    <!-- Login Section -->
+    <!-- Forgot Password Section -->
     <section class="login-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-6">
             <div class="login-box">
 
-              <h2>Welcome <em>Back!</em></h2>
-              <p class="subtitle">Login to your account to continue</p>
+              <h2>Reset <em>Password</em></h2>
+              <p class="subtitle">Enter your email and we'll send you a reset link.</p>
 
               {{-- Show errors --}}
               @if ($errors->any())
@@ -206,33 +204,29 @@
                 </div>
               @endif
 
-              <form method="POST" action="/login">
+              <form method="POST" action="/forgot-password">
                 @csrf
 
                 <div class="form-group">
                   <label for="email">Email Address</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your registered email"
+                    value="{{ old('email') }}"
+                    required
+                  >
+                  <p class="hint-text">We'll send a password reset link to this address.</p>
                 </div>
 
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-
-                <div class="form-group form-check mt-2">
-                  <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                  <label class="form-check-label" for="remember" style="font-size:13px; color:#666;">Remember me</label>
-                </div>
-
-                <button type="submit" class="filled-button">Login</button>
+                <button type="submit" class="filled-button">Send Reset Link</button>
 
               </form>
 
-              <div class="divider">or</div>
-
-              <div class="register-link">
-                Don't have an account? <a href="/register">Register here</a>
+              <div class="back-link">
+                Remembered it? <a href="/login">Back to Login</a>
               </div>
 
             </div>

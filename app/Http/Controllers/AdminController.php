@@ -51,7 +51,6 @@ class AdminController extends Controller
 
     return view('admin.bookings', compact(
         'bookings',
-        'totalUsers',
         'totalBookings',
         'pendingBookings',
         'recentBookings'
