@@ -84,6 +84,7 @@
         <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a class="nav-link" href="{{ route('admin.bookings') }}"><i class="fa fa-calendar"></i> Bookings</a>
         <a class="nav-link" href="{{ route('admin.users') }}"><i class="fa fa-users"></i> Users</a>
+        <a class="nav-link" href="{{ route('admin.fleet.create') }}"><i class="fa fa-cars"></i> Add Cars</a>
         <a class="nav-link" href="{{ route('admin.audit-logs') }}"><i class="fa fa-list"></i> Audit Logs</a>
         <hr style="border-color: rgba(255,255,255,0.1);">
         <a class="nav-link" href="{{ route('home') }}"><i class="fa fa-globe"></i> View Site</a>

@@ -6,6 +6,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\FleetController;
 
 // Public routes
 Route::get('/',            fn() => view('home'))->name('home');
