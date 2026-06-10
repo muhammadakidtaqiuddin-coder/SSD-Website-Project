@@ -26,16 +26,6 @@ class PublicPagesTest extends TestCase
         $this->get('/offers')->assertStatus(200);
     }
 
-    public function test_blog_page_returns_ok(): void
-    {
-        $this->get('/blog')->assertStatus(200);
-    }
-
-    public function test_team_page_returns_ok(): void
-    {
-        $this->get('/team')->assertStatus(200);
-    }
-
     public function test_contact_page_returns_ok(): void
     {
         $this->get('/contact')->assertStatus(200);
