@@ -1,4 +1,3 @@
-```php
 <?php
 
 namespace Tests\Feature\Auth;
@@ -57,4 +56,4 @@ class RegistrationTest extends TestCase
         $response->assertSessionHasErrors('email');
     }
 }
-```
+
