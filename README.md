@@ -1,58 +1,208 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SSD Website Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack web application built with the **Laravel 13** framework, featuring a modern frontend powered by **Tailwind CSS**, **Alpine.js**, and **Vite**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠️ Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Layer | Technology |
+|---|---|
+| Backend Framework | Laravel 13 (PHP ^8.3) |
+| Authentication | Laravel Breeze |
+| Frontend Styling | Tailwind CSS v3 + @tailwindcss/forms |
+| Frontend JS | Alpine.js v3 |
+| Build Tool | Vite 8 + laravel-vite-plugin |
+| HTTP Client | Axios |
+| Database | MySQL (`ssd_project`) |
+| Session/Cache/Queue | Database driver |
+| Testing | PHPUnit 12 |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📁 Project Structure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+SSD-Website-Project/
+├── app/                # Application core (Models, Controllers, Middleware, etc.)
+├── bootstrap/          # Framework bootstrapping files
+├── config/             # Application configuration files
+├── database/           # Migrations, seeders, and factories
+├── public/             # Publicly accessible files (entry point: index.php)
+├── resources/          # Blade views, CSS, and JS assets
+├── routes/             # Route definitions (web.php, api.php, etc.)
+├── storage/            # Logs, caches, and uploaded files
+├── tests/              # Feature and unit tests
+├── .env.example        # Environment variable template
+├── artisan             # Laravel CLI tool
+├── composer.json       # PHP dependencies
+├── package.json        # Node.js dependencies
+├── tailwind.config.js  # Tailwind CSS configuration
+├── vite.config.js      # Vite bundler configuration
+└── postcss.config.js   # PostCSS configuration
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## ⚙️ Requirements
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **PHP** >= 8.3
+- **Composer**
+- **Node.js** & **npm**
+- **MySQL** database
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🚀 Getting Started
 
-## Security Vulnerabilities
+### 1. Clone the repository
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+git clone https://github.com/muhammadakidtaqiuddin-coder/SSD-Website-Project.git
+cd SSD-Website-Project
+```
 
-## License
+### 2. Quick setup (one command)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+composer run setup
+```
+
+This will automatically:
+- Install PHP dependencies (`composer install`)
+- Copy `.env.example` to `.env`
+- Generate the application key
+- Run database migrations
+- Install Node.js dependencies
+- Build frontend assets
+
+### 3. Manual setup (step by step)
+
+```bash
+# Install PHP dependencies
+composer install
+
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+
+# Configure your database in .env
+# DB_DATABASE=ssd_project
+# DB_USERNAME=root
+# DB_PASSWORD=your_password
+
+# Run database migrations
+php artisan migrate
+
+# Install Node.js dependencies
+npm install
+
+# Build frontend assets
+npm run build
+```
+
+---
+
+## 🔧 Environment Configuration
+
+Key variables in your `.env` file:
+
+```env
+APP_NAME=Laravel
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ssd_project
+DB_USERNAME=root
+DB_PASSWORD=
+
+SESSION_DRIVER=database
+QUEUE_CONNECTION=database
+CACHE_STORE=database
+```
+
+---
+
+## 🧑‍💻 Development
+
+Start all development services at once:
+
+```bash
+composer run dev
+```
+
+This concurrently runs:
+- PHP development server (`php artisan serve`)
+- Queue listener (`php artisan queue:listen`)
+- Vite dev server with HMR (`npm run dev`)
+
+Or run them individually:
+
+```bash
+php artisan serve       # Start the web server
+npm run dev             # Start Vite HMR dev server
+```
+
+---
+
+## 🧪 Running Tests
+
+```bash
+composer run test
+# or
+php artisan test
+```
+
+Tests are written using **PHPUnit 12** and located in the `tests/` directory.
+
+---
+
+## 📦 Key Dependencies
+
+### PHP (Composer)
+
+| Package | Version | Purpose |
+|---|---|---|
+| `laravel/framework` | ^13.7 | Core framework |
+| `laravel/tinker` | ^3.0 | REPL for Laravel |
+| `laravel/breeze` | ^2.4 | Authentication scaffolding |
+| `laravel/pint` | ^1.27 | PHP code style fixer |
+| `fakerphp/faker` | ^1.23 | Fake data generation |
+| `phpunit/phpunit` | ^12.5 | Testing framework |
+
+### JavaScript (npm)
+
+| Package | Version | Purpose |
+|---|---|---|
+| `tailwindcss` | ^3.1 | Utility-first CSS framework |
+| `alpinejs` | ^3.4 | Lightweight JS reactivity |
+| `vite` | ^8.0 | Frontend build tool |
+| `axios` | ^1.16 | HTTP requests |
+| `laravel-vite-plugin` | ^3.1 | Laravel + Vite integration |
+
+---
+
+## 🌐 Languages Used
+
+- **Blade** — 49.3% (templating)
+- **PHP** — 24.8% (backend logic)
+- **JavaScript** — 20.8% (frontend interactivity)
+- **CSS** — 5.1% (styling)
+
+---
+
+## 📄 License
+
+This project is open-sourced under the [MIT License](https://opensource.org/licenses/MIT).
+
+---
+
+## 🙋 Contributing
+
+Contributions, issues and feature requests are welcome. Feel free to open a pull request or issue on [GitHub](https://github.com/muhammadakidtaqiuddin-coder/SSD-Website-Project).
