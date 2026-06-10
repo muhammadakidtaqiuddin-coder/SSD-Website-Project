@@ -7,7 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  laravel:
+  ci:
+    name: Build & Test
     runs-on: ubuntu-latest
 
     services:
@@ -15,8 +16,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: ssd_project
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: ssd_test
         ports:
           - 3306:3306
         options: >-
@@ -26,43 +26,60 @@ jobs:
           --health-retries=3
 
     steps:
-      - name: Checkout latest code
-        uses: actions/checkout@v3
+      # ── 1. Checkout ────────────────────────────────────────────────────────
+      - name: ✅ Checkout latest code
+        uses: actions/checkout@v4
 
-      - name: Set up PHP 8.2
+      # ── 2. PHP + Composer ──────────────────────────────────────────────────
+      - name: 🐘 Set up PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-          extensions: mbstring, bcmath, pdo_mysql
+          php-version: '8.3'
+          extensions: mbstring, pdo, pdo_mysql, xml, bcmath, ctype, json, tokenizer
+          coverage: none
 
-      - name: Install PHP dependencies
-        run: composer install --no-ansi --no-progress --prefer-dist
+      - name: 📦 Install PHP dependencies (composer install)
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      # ── 3. Node + npm ──────────────────────────────────────────────────────
+      - name: 🟩 Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install Node dependencies
+      - name: 📦 Install Node dependencies (npm install)
         run: npm install
 
-      - name: Copy .env and generate key
-        run: |
-          cp .env.example .env
-          php artisan key:generate
+      # ── 4. App setup ───────────────────────────────────────────────────────
+      - name: ⚙️ Create .env file
+        run: cp .env.example .env
 
-      - name: Run Laravel migrations
+      - name: 🔑 Generate application key
+        run: php artisan key:generate
+
+      # ── 5. Laravel migrations ──────────────────────────────────────────────
+      - name: 🗄️ Run Laravel migrations
         env:
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-          DB_DATABASE: ssd_project
+          DB_DATABASE: ssd_test
           DB_USERNAME: root
-          DB_PASSWORD: ""
+          DB_PASSWORD: root
         run: php artisan migrate --force
 
-      - name: Run PHPUnit tests
+      # ── 6. PHPUnit tests ───────────────────────────────────────────────────
+      - name: 🧪 Run PHPUnit tests (php artisan test)
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: ssd_test
+          DB_USERNAME: root
+          DB_PASSWORD: root
         run: php artisan test
 
-      - name: Build frontend assets
+      # ── 7. Frontend build ──────────────────────────────────────────────────
+      - name: 🏗️ Build frontend assets (npm run build)
         run: npm run build
