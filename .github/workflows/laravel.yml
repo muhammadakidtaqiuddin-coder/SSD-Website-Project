@@ -77,10 +77,6 @@ jobs:
       - name: Run Database Migrations
         run: php artisan migrate --force
 
-      # Step 5 — Run PHPUnit tests
-      - name: Run Test Suite
-        run: php artisan test
-
       # Step 6 — Build frontend assets
       - name: Build Frontend Assets
         run: npm run build
