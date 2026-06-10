@@ -28,6 +28,19 @@ class RegistrationTest extends TestCase
 
         $response->assertSessionHasNoErrors();
 
+        $response = $this->post('/register', [ 'name' => 'Test User', 'email' => 'test@example.com', 'password' => 'Password123!', 'password_confirmation' => 'Password123!', 'terms' => true, ]);
+
+
+        $response = $this->post('/register', [
+            'name' => 'Another User',
+            'email' => 'taken@example.com',
+            'password' => 'Password123!',
+            'password_confirmation' => 'Password123!',
+            'terms' => true,
+        ]);
+
+
+
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',
         ]);
