@@ -10,6 +10,7 @@ use App\Http\Controllers\FleetController;
 
 // Public routes
 Route::get('/',            fn() => view('home'))->name('home');
+Route::get('/welcome',     fn() => view('welcome'))->name('welcome');
 Route::get('/about',       fn() => view('about'))->name('about');
 Route::get('/fleet',       fn() => view('fleet'))->name('fleet');
 Route::get('/offers',      fn() => view('offers'))->name('offers');
@@ -40,6 +41,9 @@ Route::middleware('guest')->group(function () {
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showForm']);
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
 
+Route::get('/reset-password',  [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
@@ -49,31 +53,30 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin routes (admin only)
-// ❌ BEFORE (broken) — double-prefixing names and wrong method string
-// Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-//     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-//     Route::patch('/bookings/{booking}/status', [AdminController::class, 'admin.updateBookingStatus'])
-// });
-
-// ✅ AFTER (fixed)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard',                       [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/bookings',                        [AdminController::class, 'bookings'])->name('bookings');
-    Route::patch('/bookings/{booking}/status',     [AdminController::class, 'updateBookingStatus'])->name('bookings.status');
-    Route::get('/users',                           [AdminController::class, 'users'])->name('users');
-    Route::get('/audit-logs',                      [AdminController::class, 'auditLogs'])->name('audit-logs');
-});
 
+    // Dashboard
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    // ... your existing routes ...
+    // Bookings
+    Route::get('/bookings',                    [AdminController::class, 'bookings'])->name('bookings');
+    Route::patch('/bookings/{booking}/status', [AdminController::class, 'updateBookingStatus'])->name('bookings.status');
+
+    // Users CRUD
+    Route::get('/users',          [AdminController::class, 'users'])->name('users');
+    Route::post('/users',         [AdminController::class, 'storeUser'])->name('users.store');
+    Route::put('/users/{user}',   [AdminController::class, 'updateUser'])->name('users.update');
+    Route::delete('/users/{user}',[AdminController::class, 'destroyUser'])->name('users.destroy');
+
+    // Audit Logs
+    Route::get('/audit-logs', [AdminController::class, 'auditLogs'])->name('audit-logs');
 
     // Fleet / Cars
-    Route::get('/fleet',                    [FleetController::class, 'index'])->name('fleet');
-    Route::get('/fleet/create',             [FleetController::class, 'create'])->name('fleet.create');
-    Route::post('/fleet',                   [FleetController::class, 'store'])->name('fleet.store');
-    Route::get('/fleet/{car}/edit',         [FleetController::class, 'edit'])->name('fleet.edit');
-    Route::put('/fleet/{car}',              [FleetController::class, 'update'])->name('fleet.update');
-    Route::delete('/fleet/{car}',           [FleetController::class, 'destroy'])->name('fleet.destroy');
-    Route::patch('/fleet/{car}/toggle',     [FleetController::class, 'toggleAvailability'])->name('fleet.toggle');
+    Route::get('/fleet',               [FleetController::class, 'index'])->name('fleet');
+    Route::get('/fleet/create',        [FleetController::class, 'create'])->name('fleet.create');
+    Route::post('/fleet',              [FleetController::class, 'store'])->name('fleet.store');
+    Route::get('/fleet/{car}/edit',    [FleetController::class, 'edit'])->name('fleet.edit');
+    Route::put('/fleet/{car}',         [FleetController::class, 'update'])->name('fleet.update');
+    Route::delete('/fleet/{car}',      [FleetController::class, 'destroy'])->name('fleet.destroy');
+    Route::patch('/fleet/{car}/toggle',[FleetController::class, 'toggleAvailability'])->name('fleet.toggle');
 });

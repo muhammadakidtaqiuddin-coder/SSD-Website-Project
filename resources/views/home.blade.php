@@ -5,12 +5,12 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="SSD Car Rental – Reliable, affordable, and flexible vehicle rental services for every journey.">
+    <meta name="author" content="SSD Car Rental">
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>SSD | Car Rental Website Template</title>
+    <title>SSD Car Rental – Drive with Confidence</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -38,7 +38,7 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="/"><h2>Car Rental <em>Website</em></h2></a>
+          <a class="navbar-brand" href="/"><h2>SSD <em>Car Rental</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -49,7 +49,10 @@
                       <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/booking" style="padding: 8px 20px; margin-left: 10px;">booking</a></li>
+                <li class="nav-item"><a class="nav-link" href="/booking" style="padding: 8px 20px; margin-left: 10px;">Booking</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about" style="padding: 8px 20px; margin-left: 10px;">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact" style="padding: 8px 20px; margin-left: 10px;">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="/testimonials" style="padding: 8px 20px; margin-left: 10px;">Testimonials</a></li>
 
                 @guest
                     <li class="nav-item">
@@ -73,20 +76,20 @@
       <div class="owl-banner owl-carousel">
         <div class="banner-item-01">
           <div class="text-content">
-            <h4>Find your car today!</h4>
-            <h2>Lorem ipsum dolor sit amet</h2>
+            <h4>Your journey starts here</h4>
+            <h2>Find the perfect car for every occasion</h2>
           </div>
         </div>
         <div class="banner-item-02">
           <div class="text-content">
-            <h4>Fugiat Aspernatur</h4>
-            <h2>Laboriosam reprehenderit ducimus</h2>
+            <h4>Flexible Rental Plans</h4>
+            <h2>Daily, weekly, and long-term rentals available</h2>
           </div>
         </div>
         <div class="banner-item-03">
           <div class="text-content">
-            <h4>Saepe Omnis</h4>
-            <h2>Quaerat suscipit unde minus dicta</h2>
+            <h4>Drive with Peace of Mind</h4>
+            <h2>Fully insured vehicles and 24/7 roadside support</h2>
           </div>
         </div>
       </div>
@@ -98,39 +101,39 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Offers</h2>
+              <h2>Current Offers</h2>
               <a href="/offers">view more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="/offers"><img src="{{ asset('assets/images/offer-1-370x270.jpg') }}" alt=""></a>
+              <a href="/offers"><img src="{{ asset('assets/images/offer-1-370x270.jpg') }}" alt="Weekend Getaway Deal"></a>
               <div class="down-content">
-                <a href="/offers"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+                <a href="/offers"><h4>Weekend Getaway – Economy & Compact Cars</h4></a>
                 <h6><small>from</small> $120 <small>per weekend</small></h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
+                <p>Enjoy a stress-free weekend escape with our affordable economy and compact car packages. Unlimited mileage included.</p>
               </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="/offers"><img src="{{ asset('assets/images/offer-2-370x270.jpg') }}" alt=""></a>
+              <a href="/offers"><img src="{{ asset('assets/images/offer-2-370x270.jpg') }}" alt="Family Road Trip Package"></a>
               <div class="down-content">
-                <a href="/offers"><h4>Estorum aspernatur officiis accusamus </h4></a>
+                <a href="/offers"><h4>Family Road Trip – SUV & MPV Packages</h4></a>
                 <h6><small>from</small> $150 <small>per weekend</small></h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
+                <p>Spacious and comfortable SUVs and MPVs for your family trips. Child seat and GPS navigation available upon request.</p>
               </div>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="/offers"><img src="{{ asset('assets/images/offer-3-370x270.jpg') }}" alt=""></a>
+              <a href="/offers"><img src="{{ asset('assets/images/offer-3-370x270.jpg') }}" alt="Business Travel Deal"></a>
               <div class="down-content">
-                <a href="/offers"><h4>Reiciendis ullam culpa optio providen</h4></a>
+                <a href="/offers"><h4>Business Travel – Premium Sedan Deals</h4></a>
                 <h6><small>from</small> $150 <small>per weekend</small></h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
+                <p>Make a lasting impression with our premium sedans. Ideal for corporate events, airport transfers, and client meetings.</p>
               </div>
             </div>
           </div>
@@ -148,19 +151,19 @@
           </div>
           <div class="col-md-6">
             <div class="left-content">
-              <p>Lorem ipsum dolor sit amet, <a href="#">consectetur</a> adipisicing elit. Explicabo, esse consequatur alias repellat in excepturi inventore ad <a href="#">asperiores</a> tempora ipsa. Accusantium tenetur voluptate labore aperiam molestiae rerum excepturi minus in pariatur praesentium, corporis, aliquid dicta.</p>
+              <p>SSD Car Rental has been providing reliable and affordable vehicle rental services to individuals, families, and businesses. We are committed to delivering a seamless rental experience — from booking to return — with a focus on <a href="/fleet">vehicle quality</a>, <a href="/contact">customer support</a>, and transparent pricing.</p>
               <ul class="featured-list">
-                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                <li><a href="#">Consectetur an adipisicing elit</a></li>
-                <li><a href="#">It aquecorporis nulla aspernatur</a></li>
-                <li><a href="#">Corporis, omnis doloremque</a></li>
+                <li><a href="#">Wide selection of well-maintained vehicles</a></li>
+                <li><a href="#">Flexible rental durations with no hidden fees</a></li>
+                <li><a href="#">Comprehensive insurance coverage included</a></li>
+                <li><a href="#">24/7 roadside assistance and customer support</a></li>
               </ul>
               <a href="/about" class="filled-button">Read More</a>
             </div>
           </div>
           <div class="col-md-6">
             <div class="right-image">
-              <img src="{{ asset('assets/images/about-1-570x350.jpg') }}" alt="">
+              <img src="{{ asset('assets/images/about-1-570x350.jpg') }}" alt="About SSD Car Rental">
             </div>
           </div>
         </div>
@@ -172,35 +175,35 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Latest blog posts</h2>
+              <h2>Latest Blog Posts</h2>
               <a href="/blog">read more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6">
             <div class="service-item">
-              <a href="#" class="services-item-image"><img src="{{ asset('assets/images/blog-1-370x270.jpg') }}" class="img-fluid" alt=""></a>
+              <a href="#" class="services-item-image"><img src="{{ asset('assets/images/blog-1-370x270.jpg') }}" class="img-fluid" alt="Road trip planning tips"></a>
               <div class="down-content">
-                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit hic</a></h4>
-                <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
+                <h4><a href="#">Top 5 Tips for Planning a Stress-Free Road Trip</a></h4>
+                <p style="margin: 0;"> SSD Editorial &nbsp;&nbsp;|&nbsp;&nbsp; 10/06/2025 09:00 &nbsp;&nbsp;|&nbsp;&nbsp; 248</p>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="service-item">
-              <a href="#" class="services-item-image"><img src="{{ asset('assets/images/blog-2-370x270.jpg') }}" class="img-fluid" alt=""></a>
+              <a href="#" class="services-item-image"><img src="{{ asset('assets/images/blog-2-370x270.jpg') }}" class="img-fluid" alt="Choosing the right rental car"></a>
               <div class="down-content">
-                <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h4>
-                <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
+                <h4><a href="#">How to Choose the Right Car for Your Trip</a></h4>
+                <p style="margin: 0;"> SSD Editorial &nbsp;&nbsp;|&nbsp;&nbsp; 02/06/2025 11:00 &nbsp;&nbsp;|&nbsp;&nbsp; 185</p>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="service-item">
-              <a href="#" class="services-item-image"><img src="{{ asset('assets/images/blog-3-370x270.jpg') }}" class="img-fluid" alt=""></a>
+              <a href="#" class="services-item-image"><img src="{{ asset('assets/images/blog-3-370x270.jpg') }}" class="img-fluid" alt="Understanding rental insurance"></a>
               <div class="down-content">
-                <h4><a href="#">Aperiam modi voluptatum fuga officiis cumque</a></h4>
-                <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
+                <h4><a href="#">Understanding Car Rental Insurance: What You Need to Know</a></h4>
+                <p style="margin: 0;"> SSD Editorial &nbsp;&nbsp;|&nbsp;&nbsp; 25/05/2025 08:30 &nbsp;&nbsp;|&nbsp;&nbsp; 310</p>
               </div>
             </div>
           </div>
@@ -213,7 +216,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Happy Clients</h2>
+              <h2>What Our Clients Say</h2>
               <a href="/testimonials">read more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
@@ -224,8 +227,8 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>John Doe</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
+                  <h4>Ahmad Razif</h4>
+                  <p class="n-m"><em>"Booking was quick and easy. The car was in excellent condition and the staff were very professional. Will definitely rent again."</em></p>
                 </div>
               </div>
 
@@ -234,8 +237,8 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>Jane Smith</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
+                  <h4>Sarah Lim</h4>
+                  <p class="n-m"><em>"Great value for money. SSD Car Rental made our family vacation so much easier. The SUV was spacious and comfortable throughout the trip."</em></p>
                 </div>
               </div>
 
@@ -244,8 +247,8 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>Antony Davis</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
+                  <h4>David Raj</h4>
+                  <p class="n-m"><em>"Reliable service and transparent pricing. No hidden charges, and the 24/7 support gave me real peace of mind during my business trip."</em></p>
                 </div>
               </div>
 
@@ -254,8 +257,8 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>John Doe</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
+                  <h4>Nurul Ain</h4>
+                  <p class="n-m"><em>"I was impressed by how smooth the entire process was, from online booking to vehicle pickup. Highly recommended for anyone travelling in the area."</em></p>
                 </div>
               </div>
 
@@ -264,8 +267,8 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>Jane Smith</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
+                  <h4>Kevin Tan</h4>
+                  <p class="n-m"><em>"The premium sedan I rented for a client event was immaculate. SSD Car Rental is now my go-to for all business travel needs."</em></p>
                 </div>
               </div>
 
@@ -274,8 +277,8 @@
                   <i class="fa fa-user"></i>
                 </div>
                 <div class="down-content">
-                  <h4>Antony Davis</h4>
-                  <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>
+                  <h4>Priya Menon</h4>
+                  <p class="n-m"><em>"Affordable rates without compromising on quality. The team was courteous and the vehicle was ready exactly on time. Five stars!"</em></p>
                 </div>
               </div>
             </div>
@@ -291,8 +294,8 @@
             <div class="inner-content">
               <div class="row">
                 <div class="col-md-8">
-                  <h4>Lorem ipsum dolor sit amet, consectetur adipisicing.</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
+                  <h4>Ready to hit the road? Reserve your vehicle today.</h4>
+                  <p>Our team is available to assist you in finding the right vehicle at the right price. Get in touch and we'll handle the rest.</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-right">
                   <a href="/contact" class="filled-button">Contact Us</a>
@@ -309,7 +312,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="inner-content">
-              <p>Copyright © 2020 Company Name - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
+              <p>Copyright &copy; 2025 SSD Car Rental. All rights reserved.</p>
             </div>
           </div>
         </div>

@@ -77,26 +77,86 @@ class AdminController extends Controller
 
     // View all users
     public function users()
-{
-    $users = User::orderBy('created_at', 'desc')->get();
+    {
+        $users = User::orderBy('created_at', 'desc')->paginate(15);
 
-    $totalUsers = User::where('role', 'user')->count();
-    $totalBookings = Booking::count();
-    $pendingBookings = Booking::where('status', 'pending')->count();
+        return view('admin.users', compact('users'));
+    }
 
-    $recentBookings = Booking::with('user')
-        ->latest()
-        ->take(5)
-        ->get();
+    // Create a new user
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users,email',
+            'role'     => 'required|in:user,staff,admin',
+            'password' => 'required|min:8|confirmed',
+        ]);
 
-    return view('admin.users', compact(
-        'users',
-        'totalUsers',
-        'totalBookings',
-        'pendingBookings',
-        'recentBookings'
-    ));
-}
+        User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'role'     => $request->role,
+            'password' => bcrypt($request->password),
+        ]);
+
+        AuditLog::log(
+            'admin_user_created',
+            'Admin created user: ' . $request->email,
+            'success'
+        );
+
+        return back()->with('success', 'User created successfully.');
+    }
+
+    // Update an existing user
+    public function updateUser(Request $request, User $user)
+    {
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users,email,' . $user->id,
+            'role'     => 'required|in:user,staff,admin',
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+        $data = [
+            'name'  => $request->name,
+            'email' => $request->email,
+            'role'  => $request->role,
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->update($data);
+
+        AuditLog::log(
+            'admin_user_updated',
+            'Admin updated user ID ' . $user->id . ' (' . $user->email . ')',
+            'success'
+        );
+
+        return back()->with('success', 'User updated successfully.');
+    }
+
+    // Delete a user
+    public function destroyUser(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'You cannot delete your own account.');
+        }
+
+        AuditLog::log(
+            'admin_user_deleted',
+            'Admin deleted user: ' . $user->email,
+            'success'
+        );
+
+        $user->delete();
+
+        return back()->with('success', 'User deleted successfully.');
+    }
 
     // View audit logs
     public function auditLogs()
