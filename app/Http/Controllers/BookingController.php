@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AuditLog;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use App\Models\Car;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
@@ -20,9 +21,15 @@ class BookingController extends Controller
     }
 
     // Show create form
-    public function create()
+    public function create(Request $request)
     {
-        return view('bookings.create');
+        $car = null;
+
+        if ($request->has('car')) {
+            $car = Car::find($request->car);
+        }
+
+        return view('bookings.create', compact('car'));
     }
 
     // Store new booking
@@ -135,4 +142,5 @@ class BookingController extends Controller
         return redirect()->route('bookings.index')
                          ->with('success', 'Booking cancelled successfully!');
     }
+
 }

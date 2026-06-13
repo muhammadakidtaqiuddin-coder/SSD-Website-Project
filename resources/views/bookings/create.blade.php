@@ -46,6 +46,37 @@
 
       <div class="row justify-content-center">
         <div class="col-md-8">
+
+          {{-- Selected Car Info Card --}}
+          @if(isset($car))
+          <div class="card shadow-sm mb-4" style="border-left: 4px solid #f5a425;">
+            <div class="card-body p-3">
+              <div class="d-flex align-items-center">
+                @if($car->image)
+                  <img src="{{ asset('storage/' . $car->image) }}"
+                       alt="{{ $car->name }}"
+                       style="width:100px; height:68px; object-fit:cover; border-radius:8px; margin-right:16px;">
+                @endif
+                <div class="flex-grow-1">
+                  <h5 class="mb-1 font-weight-700" style="color:#1a1a2e;">{{ $car->name }}</h5>
+                  <div class="text-muted" style="font-size:13px;">
+                    {{ $car->brand }} {{ $car->model }} · {{ $car->year }} ·
+                    {{ ucfirst($car->transmission) }} · {{ ucfirst($car->fuel_type) }} ·
+                    {{ $car->seats }} seats
+                  </div>
+                </div>
+                <div class="text-right ml-3">
+                  <div style="font-size:20px; font-weight:700; color:#f5a425;">
+                    RM {{ number_format($car->price_per_day, 2) }}
+                  </div>
+                  <div style="font-size:12px; color:#888;">per day</div>
+                  <div style="font-size:12px; color:#888;">Deposit: RM {{ number_format($car->deposit, 2) }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endif
+
           <div class="card shadow-sm">
             <div class="card-header" style="background:#f5a425;">
               <h4 class="mb-0 text-white"><i class="fa fa-car mr-2"></i> New Car Rental Booking</h4>
@@ -69,35 +100,48 @@
               <form action="{{ route('bookings.store') }}" method="POST">
                 @csrf
 
+                {{-- Hidden car_id if car was pre-selected --}}
+                @if(isset($car))
+                  <input type="hidden" name="car_id" value="{{ $car->id }}">
+                @endif
+
+                {{-- Car Name --}}
                 <div class="form-group">
                   <label for="car_name" style="font-weight:600;">Car Name <span class="text-danger">*</span></label>
                   <input type="text" name="car_name" id="car_name"
                          class="form-control @error('car_name') is-invalid @enderror"
-                         value="{{ old('car_name') }}"
+                         value="{{ old('car_name', isset($car) ? $car->name : '') }}"
                          placeholder="e.g. Toyota Vios"
-                         required>
+                         {{ isset($car) ? 'readonly' : 'required' }}>
                   @error('car_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
 
+                {{-- Car Type --}}
                 <div class="form-group">
                   <label for="car_type" style="font-weight:600;">Car Type <span class="text-danger">*</span></label>
                   <select name="car_type" id="car_type"
-                          class="form-control @error('car_type') is-invalid @enderror" required>
+                          class="form-control @error('car_type') is-invalid @enderror"
+                          {{ isset($car) ? 'disabled' : 'required' }}>
                     <option value="">-- Select Type --</option>
-                    <option value="Sedan"      {{ old('car_type') == 'Sedan'      ? 'selected' : '' }}>Sedan</option>
-                    <option value="SUV"        {{ old('car_type') == 'SUV'        ? 'selected' : '' }}>SUV</option>
-                    <option value="Hatchback"  {{ old('car_type') == 'Hatchback'  ? 'selected' : '' }}>Hatchback</option>
-                    <option value="Luxury"     {{ old('car_type') == 'Luxury'     ? 'selected' : '' }}>Luxury</option>
-                    <option value="MPV"        {{ old('car_type') == 'MPV'        ? 'selected' : '' }}>MPV</option>
-                    <option value="Pickup"     {{ old('car_type') == 'Pickup'     ? 'selected' : '' }}>Pickup Truck</option>
+                    @foreach(['Sedan','SUV','Hatchback','Luxury','MPV','Pickup','Van'] as $type)
+                      <option value="{{ $type }}"
+                        {{ strtolower(old('car_type', isset($car) ? $car->category : '')) == strtolower($type) ? 'selected' : '' }}>
+                        {{ $type }}
+                      </option>
+                    @endforeach
                   </select>
+                  {{-- Re-submit value when disabled --}}
+                  @if(isset($car))
+                    <input type="hidden" name="car_type" value="{{ $car->category }}">
+                  @endif
                   @error('car_type')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
 
+                {{-- Dates --}}
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -131,9 +175,14 @@
                 <div id="price-estimate" class="alert alert-info py-2" style="display:none;">
                   <i class="fa fa-calculator mr-1"></i>
                   Estimated total: <strong id="price-value"></strong>
-                  <small class="text-muted ml-1">(based on $50/day)</small>
+                  @if(isset($car))
+                    <small class="text-muted ml-1">(RM {{ number_format($car->price_per_day, 2) }}/day + RM {{ number_format($car->deposit, 2) }} deposit)</small>
+                  @else
+                    <small class="text-muted ml-1">(based on RM 50/day)</small>
+                  @endif
                 </div>
 
+                {{-- Pickup Location --}}
                 <div class="form-group">
                   <label for="pickup_location" style="font-weight:600;">Pickup Location <span class="text-danger">*</span></label>
                   <input type="text" name="pickup_location" id="pickup_location"
@@ -146,6 +195,7 @@
                   @enderror
                 </div>
 
+                {{-- Notes --}}
                 <div class="form-group">
                   <label for="notes" style="font-weight:600;">Notes <small class="text-muted">(optional)</small></label>
                   <textarea name="notes" id="notes" rows="3"
@@ -158,8 +208,8 @@
 
                 <hr>
                 <div class="d-flex justify-content-between">
-                  <a href="/booking" class="btn btn-outline-secondary" style="border-radius:30px; padding:10px 28px;">
-                    <i class="fa fa-arrow-left mr-1"></i> Cancel
+                  <a href="{{ route('cars') }}" class="btn btn-outline-secondary" style="border-radius:30px; padding:10px 28px;">
+                    <i class="fa fa-arrow-left mr-1"></i> Back to Cars
                   </a>
                   <button type="submit" class="btn btn-warning" style="border-radius:30px; padding:10px 32px; font-weight:600;">
                     <i class="fa fa-check mr-1"></i> Submit Booking
@@ -168,6 +218,7 @@
               </form>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -180,21 +231,39 @@
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script>
-    // Live price estimate
+    const pricePerDay = {{ isset($car) ? $car->price_per_day : 50 }};
+    const deposit     = {{ isset($car) ? $car->deposit : 0 }};
+
     function updateEstimate() {
       const pickup = document.getElementById('pickup_date').value;
       const ret    = document.getElementById('return_date').value;
       if (pickup && ret) {
         const days = Math.ceil((new Date(ret) - new Date(pickup)) / 86400000);
         if (days > 0) {
-          document.getElementById('price-value').textContent = '$' + (days * 50).toFixed(2) + ' (' + days + ' day' + (days > 1 ? 's' : '') + ')';
+          const rental  = days * pricePerDay;
+          const total   = rental + deposit;
+          const label   = 'RM ' + rental.toFixed(2) + ' (' + days + ' day' + (days > 1 ? 's' : '') + ')'
+                        + (deposit > 0 ? ' + RM ' + deposit.toFixed(2) + ' deposit = RM ' + total.toFixed(2) : '');
+          document.getElementById('price-value').textContent = label;
           document.getElementById('price-estimate').style.display = 'block';
         } else {
           document.getElementById('price-estimate').style.display = 'none';
         }
       }
     }
-    document.getElementById('pickup_date').addEventListener('change', updateEstimate);
+
+    // Set return_date min when pickup changes
+    document.getElementById('pickup_date').addEventListener('change', function () {
+      const next = new Date(this.value);
+      next.setDate(next.getDate() + 1);
+      const minReturn = next.toISOString().split('T')[0];
+      document.getElementById('return_date').min = minReturn;
+      if (document.getElementById('return_date').value < minReturn) {
+        document.getElementById('return_date').value = '';
+      }
+      updateEstimate();
+    });
+
     document.getElementById('return_date').addEventListener('change', updateEstimate);
   </script>
 </body>

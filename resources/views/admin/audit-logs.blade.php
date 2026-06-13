@@ -133,6 +133,8 @@
             <i class="fa fa-users"></i> Users
         </a>
 
+        <a class="nav-link" href="{{ route('admin.fleet') }}"><i class="fa fa-car"></i> Fleet</a>
+
         <a class="nav-link active" href="{{ route('admin.audit-logs') }}">
             <i class="fa fa-list"></i> Audit Logs
         </a>

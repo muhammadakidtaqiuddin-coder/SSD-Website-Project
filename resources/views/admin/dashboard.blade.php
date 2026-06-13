@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bookings | Car Rental</title>
+    <title>Admin Dashboard | Car Rental</title>
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
@@ -84,7 +84,8 @@
         <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a class="nav-link" href="{{ route('admin.bookings') }}"><i class="fa fa-calendar"></i> Bookings</a>
         <a class="nav-link" href="{{ route('admin.users') }}"><i class="fa fa-users"></i> Users</a>
-        <a class="nav-link" href="{{ route('admin.fleet.create') }}"><i class="fa fa-cars"></i> Add Cars</a>
+        <a class="nav-link" href="{{ route('admin.fleet') }}"><i class="fa fa-car"></i> Fleet</a>
+        <!--<a class="nav-link" href="{{ route('admin.fleet.create') }}"><i class="fa fa-plus"></i> Add Cars</a>-->
         <a class="nav-link" href="{{ route('admin.audit-logs') }}"><i class="fa fa-list"></i> Audit Logs</a>
         <hr style="border-color: rgba(255,255,255,0.1);">
         <a class="nav-link" href="{{ route('home') }}"><i class="fa fa-globe"></i> View Site</a>
@@ -98,7 +99,7 @@
 <!-- Main Content -->
 <div class="main-content">
     <div class="topbar">
-        <h5>Booking Details</h5>
+        <h5>Dashboard</h5>
         <span style="font-size:14px; color:#888;">Welcome, {{ auth()->user()->name }}</span>
     </div>
 
@@ -164,7 +165,7 @@
                         <td>{{ $booking->car_name }}</td>
                         <td>{{ $booking->pickup_date->format('d M Y') }}</td>
                         <td>{{ $booking->return_date->format('d M Y') }}</td>
-                        <td>${{ number_format($booking->total_price, 2) }}</td>
+                        <td>RM {{ number_format($booking->total_price, 2) }}</td>
                         <td><span class="badge badge-{{ $booking->status }}">{{ ucfirst($booking->status) }}</span></td>
                     </tr>
                     @empty
@@ -180,5 +181,3 @@
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
-
-
