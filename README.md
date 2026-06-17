@@ -226,17 +226,17 @@ php artisan serve
 > **Note:** Replace the placeholder sections below with actual screenshots of your running application.
 
 ### Login Page
-```
+
 <img width="1213" height="880" alt="image" src="https://github.com/user-attachments/assets/36338b02-1a59-49f0-a8ef-b0c723d47569" />
 <img width="1175" height="880" alt="image" src="https://github.com/user-attachments/assets/0778cd20-60ba-4923-86d1-c7567e1eef89" />
 
-```
+
 *Secure login form with CSRF protection and input validation.*
 
 ### Home / Car Listing Page
-```
 
-```
+<img width="1628" height="922" alt="image" src="https://github.com/user-attachments/assets/bdfe4e59-5d4e-421a-aa5a-d9d0367640eb" />
+
 *Displays available cars with details, pricing, and availability status.*
 
 ### Booking Form
@@ -247,20 +247,20 @@ php artisan serve
 *Validated booking form with date selection and car confirmation.*
 
 ### Customer Dashboard
-```
+
 <img width="1627" height="904" alt="image" src="https://github.com/user-attachments/assets/793225c8-fcf0-4f5f-b3a9-595e2b5f0bbb" />
 
-```
+
 *Users can view, manage, and cancel their active bookings.*
 
 ### Admin Dashboard
-```
+
 <img width="1618" height="438" alt="image" src="https://github.com/user-attachments/assets/816bbffb-7126-41cd-87d3-b81fdef28f24" />
 <img width="1581" height="881" alt="image" src="https://github.com/user-attachments/assets/e580f3bd-6f2f-4f97-a13c-b6b4bddd0e06" />
 <img width="1580" height="877" alt="image" src="https://github.com/user-attachments/assets/61e3db93-48df-4894-94c9-b6c568a5d813" />
 <img width="1590" height="877" alt="audit-logs" src="https://github.com/user-attachments/assets/e694ece6-c78e-4cc2-b77d-bd9587f8649d" />
 
-```
+
 *Admin can manage all cars, view all bookings, and handle user accounts.*
 
 ---
