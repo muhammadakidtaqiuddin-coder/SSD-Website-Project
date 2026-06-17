@@ -211,7 +211,7 @@ php artisan serve
 
 | Requirement | Version |
 |-------------|---------|
-| PHP | >= 8.3 |
+| PHP | >= 8.4 |
 | Composer | >= 2.0 |
 | Node.js | >= 18.0 |
 | Database | MySQL 8+ / SQLite 3+ |
