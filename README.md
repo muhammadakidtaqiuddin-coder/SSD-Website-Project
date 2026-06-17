@@ -80,7 +80,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-> 📁 The database file (database.sqlite) is located in the database/ folde
+> 📁 The database file (ssd_project.sql) is located in the database/ folder
 
 
 **7. Run Database Migrations**
