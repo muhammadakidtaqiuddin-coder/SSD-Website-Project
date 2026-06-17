@@ -77,7 +77,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=ssd_car_rental
 DB_USERNAME=root
-DB_PASSWORD=your_password
+DB_PASSWORD=
 ```
 
 > Alternatively, use **SQLite** for quick local testing:
