@@ -235,7 +235,7 @@ php artisan serve
 
 ### Home / Car Listing Page
 ```
-<img width="1618" height="707" alt="image" src="https://github.com/user-attachments/assets/29336cf8-8157-4701-b82e-43e3ee4aa03b" />
+
 ```
 *Displays available cars with details, pricing, and availability status.*
 
@@ -258,7 +258,7 @@ php artisan serve
 <img width="1618" height="438" alt="image" src="https://github.com/user-attachments/assets/816bbffb-7126-41cd-87d3-b81fdef28f24" />
 <img width="1581" height="881" alt="image" src="https://github.com/user-attachments/assets/e580f3bd-6f2f-4f97-a13c-b6b4bddd0e06" />
 <img width="1580" height="877" alt="image" src="https://github.com/user-attachments/assets/61e3db93-48df-4894-94c9-b6c568a5d813" />
-<img width="1590" height="877" alt="image" src="https://github.com/user-attachments/assets/27b44dd0-739a-42c8-a6e1-17bfab2a2e5c" />
+<img width="1590" height="877" alt="audit-logs" src="https://github.com/user-attachments/assets/e694ece6-c78e-4cc2-b77d-bd9587f8649d" />
 
 ```
 *Admin can manage all cars, view all bookings, and handle user accounts.*
