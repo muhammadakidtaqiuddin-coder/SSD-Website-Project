@@ -80,11 +80,8 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-> Alternatively, use **SQLite** for quick local testing:
-> ```env
-> DB_CONNECTION=sqlite
-> ```
-> Then create the file: `touch database/database.sqlite`
+> 📁 The database file (database.sqlite) is located in the database/ folde
+
 
 **7. Run Database Migrations**
 ```bash
