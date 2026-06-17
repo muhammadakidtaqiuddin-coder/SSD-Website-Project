@@ -240,10 +240,10 @@ php artisan serve
 *Displays available cars with details, pricing, and availability status.*
 
 ### Booking Form
-```
+
 <img width="1138" height="844" alt="image" src="https://github.com/user-attachments/assets/2a6aa74d-3062-463f-b084-48776089983f" />
 
-```
+
 *Validated booking form with date selection and car confirmation.*
 
 ### Customer Dashboard
