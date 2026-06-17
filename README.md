@@ -1,199 +1,277 @@
-# SSD Website Project
+# 🚗 SSD Car Rental — Secure Web Application
 
-A full-stack web application built with the **Laravel 13** framework, featuring a modern frontend powered by **Tailwind CSS**, **Alpine.js**, and **Vite**.
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Backend Framework | Laravel 13 (PHP ^8.3) |
-| Authentication | Laravel Breeze |
-| Frontend Styling | Tailwind CSS v3 + @tailwindcss/forms |
-| Frontend JS | Alpine.js v3 |
-| Build Tool | Vite 8 + laravel-vite-plugin |
-| HTTP Client | Axios |
-| Database | MySQL (`ssd_project`) |
-| Session/Cache/Queue | Database driver |
-| Testing | PHPUnit 12 |
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-red?logo=laravel)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.3%2B-blue?logo=php)](https://php.net)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.x-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
-## 📁 Project Structure
+## 📋 1. Project Description
 
-```
-SSD-Website-Project/
-├── app/                # Application core (Models, Controllers, Middleware, etc.)
-├── bootstrap/          # Framework bootstrapping files
-├── config/             # Application configuration files
-├── database/           # Migrations, seeders, and factories
-├── public/             # Publicly accessible files (entry point: index.php)
-├── resources/          # Blade views, CSS, and JS assets
-├── routes/             # Route definitions (web.php, api.php, etc.)
-├── storage/            # Logs, caches, and uploaded files
-├── tests/              # Feature and unit tests
-├── .env.example        # Environment variable template
-├── artisan             # Laravel CLI tool
-├── composer.json       # PHP dependencies
-├── package.json        # Node.js dependencies
-├── tailwind.config.js  # Tailwind CSS configuration
-├── vite.config.js      # Vite bundler configuration
-└── postcss.config.js   # PostCSS configuration
-```
+**SSD Car Rental** is a full-stack web application developed as part of the **Secure Software Development (SSD)** coursework at Universiti Kuala Lumpur (UniKL). The system allows customers to browse, book, and manage car rentals online, while providing administrators with a secure dashboard to manage vehicles, bookings, and users.
+
+The project was built with a **security-first mindset**, implementing industry-standard secure coding practices throughout the development lifecycle — from authentication and input validation to database access controls and session management.
+
+**Key Functionalities:**
+- User registration and secure login/logout
+- Browse available cars with details (model, price, availability)
+- Booking management for customers (create, view, cancel)
+- Admin dashboard for managing cars, bookings, and users
+- Role-based access control (Customer vs Admin)
+
+**Tech Stack:** Laravel 13 · PHP 8.3 · Blade Templates · Tailwind CSS · Vite · SQLite/MySQL
 
 ---
 
-## ⚙️ Requirements
+## ⚙️ 2. Installation Steps
 
-- **PHP** >= 8.3
-- **Composer**
-- **Node.js** & **npm**
-- **MySQL** database
+### Prerequisites
 
----
+Before you begin, ensure you have the following installed:
 
-## 🚀 Getting Started
+| Tool | Minimum Version |
+|------|----------------|
+| PHP | 8.4+ |
+| Composer | 2.x |
+| Node.js | 18+ |
+| npm | 9+ |
+| Git | Any |
+| MySQL / SQLite | Any |
 
-### 1. Clone the repository
+### Step-by-Step Installation
 
+**1. Clone the Repository**
 ```bash
 git clone https://github.com/muhammadakidtaqiuddin-coder/SSD-Website-Project.git
 cd SSD-Website-Project
 ```
 
-### 2. Quick setup (one command)
-
+**2. Install PHP Dependencies**
 ```bash
-composer run setup
-```
-
-This will automatically:
-- Install PHP dependencies (`composer install`)
-- Copy `.env.example` to `.env`
-- Generate the application key
-- Run database migrations
-- Install Node.js dependencies
-- Build frontend assets
-
-### 3. Manual setup (step by step)
-
-```bash
-# Install PHP dependencies
 composer install
-
-# Copy environment file
-cp .env.example .env
-
-# Generate application key
-php artisan key:generate
-
-# Configure your database in .env
-# DB_DATABASE=ssd_project
-# DB_USERNAME=root
-# DB_PASSWORD=your_password
-
-# Run database migrations
-php artisan migrate
-
-# Install Node.js dependencies
-npm install
-
-# Build frontend assets
-npm run build
 ```
 
----
+**3. Install Node.js Dependencies**
+```bash
+npm install
+```
 
-## 🔧 Environment Configuration
+**4. Set Up Environment File**
+```bash
+cp .env.example .env
+```
 
-Key variables in your `.env` file:
+**5. Generate Application Key**
+```bash
+php artisan key:generate
+```
+
+**6. Configure the Database**
+
+Open `.env` and update the database settings:
 
 ```env
-APP_NAME=Laravel
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost
-
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=ssd_project
+DB_DATABASE=ssd_car_rental
 DB_USERNAME=root
-DB_PASSWORD=
-
-SESSION_DRIVER=database
-QUEUE_CONNECTION=database
-CACHE_STORE=database
+DB_PASSWORD=your_password
 ```
+
+> Alternatively, use **SQLite** for quick local testing:
+> ```env
+> DB_CONNECTION=sqlite
+> ```
+> Then create the file: `touch database/database.sqlite`
+
+**7. Run Database Migrations**
+```bash
+php artisan migrate
+```
+
+**8. (Optional) Seed Sample Data**
+```bash
+php artisan db:seed
+```
+
+**9. Build Frontend Assets**
+```bash
+npm run build
+```
+
+> Or use the automated setup script:
+> ```bash
+> composer run setup
+> ```
 
 ---
 
-## 🧑‍💻 Development
+## 🔒 3. Security Features Summary
 
-Start all development services at once:
+This application incorporates the following security controls aligned with **OWASP Top 10** mitigation strategies:
+
+### 🔐 Authentication & Session Management
+- **Laravel Breeze** used for authentication scaffolding with secure login, registration, password reset, and email verification
+- Passwords are hashed using **bcrypt** (via Laravel's `Hash` facade) — never stored in plaintext
+- Session tokens are regenerated upon login to prevent **session fixation** attacks
+- HTTPS-ready with secure cookie flags (`SESSION_SECURE_COOKIE=true` in production)
+
+### 🛡️ CSRF Protection
+- All state-changing forms include Laravel's **CSRF token** (`@csrf` Blade directive)
+- Laravel's `VerifyCsrfToken` middleware automatically validates tokens on every POST/PUT/DELETE request
+
+### 🧹 Input Validation & Sanitization
+- All user input is validated using Laravel's **Form Request Validation** classes before processing
+- Validation rules enforce type, length, and format constraints (e.g. `required|string|max:255|email`)
+- Blade templates automatically **escape output** using `{{ }}` syntax, preventing **XSS (Cross-Site Scripting)**
+
+### 🗄️ SQL Injection Prevention
+- All database queries use **Laravel Eloquent ORM** and the **Query Builder** with parameterized queries — raw SQL is avoided
+- No user input is directly interpolated into database queries
+
+### 👤 Role-Based Access Control (RBAC)
+- **Middleware** enforces access restrictions based on user roles (Admin vs Customer)
+- Admin routes are protected and inaccessible to unauthenticated or unauthorized users
+- Route model binding ensures users can only access their own resources
+
+### 📋 Mass Assignment Protection
+- Eloquent models define `$fillable` arrays to whitelist only permitted fields, preventing **mass assignment vulnerabilities**
+
+### 🔑 Environment & Secret Management
+- Sensitive credentials (DB passwords, app keys) are stored in `.env` files, excluded from version control via `.gitignore`
+- `.env.example` provides a template without actual secrets
+
+### 🚦 Rate Limiting
+- Laravel's built-in **rate limiter** is applied to authentication routes to mitigate **brute-force attacks**
+
+---
+
+## ▶️ 4. How to Run the App
+
+### Development Mode
+
+Run the full development stack (server + queue + Vite HMR) with a single command:
 
 ```bash
 composer run dev
 ```
 
-This concurrently runs:
-- PHP development server (`php artisan serve`)
-- Queue listener (`php artisan queue:listen`)
-- Vite dev server with HMR (`npm run dev`)
+This concurrently starts:
+- `php artisan serve` — Laravel development server at `http://127.0.0.1:8000`
+- `php artisan queue:listen` — Background job queue worker
+- `npm run dev` — Vite frontend asset compiler with hot reload
 
-Or run them individually:
+### Or run individually:
 
 ```bash
-php artisan serve       # Start the web server
-npm run dev             # Start Vite HMR dev server
+# Terminal 1 — Backend
+php artisan serve
+
+# Terminal 2 — Frontend
+npm run dev
+```
+
+Then open your browser at: **http://127.0.0.1:8000**
+
+### Production Build
+
+```bash
+npm run build
+php artisan optimize
+php artisan serve
 ```
 
 ---
 
-## 🧪 Running Tests
+## 📦 5. Dependencies
 
-```bash
-composer run test
-# or
-php artisan test
-```
-
-Tests are written using **PHPUnit 12** and located in the `tests/` directory.
-
----
-
-## 📦 Key Dependencies
-
-### PHP (Composer)
+### PHP / Backend (composer.json)
 
 | Package | Version | Purpose |
-|---|---|---|
-| `laravel/framework` | ^13.7 | Core framework |
-| `laravel/tinker` | ^3.0 | REPL for Laravel |
-| `laravel/breeze` | ^2.4 | Authentication scaffolding |
+|---------|---------|---------|
+| `laravel/framework` | ^13.7 | Core Laravel MVC framework |
+| `laravel/tinker` | ^3.0 | REPL for artisan commands |
+| `laravel/breeze` | ^2.4 | Lightweight authentication scaffolding |
+| `fakerphp/faker` | ^1.23 | Fake data generation for seeding |
 | `laravel/pint` | ^1.27 | PHP code style fixer |
-| `fakerphp/faker` | ^1.23 | Fake data generation |
 | `phpunit/phpunit` | ^12.5 | Testing framework |
+| `nunomaduro/collision` | ^8.6 | Improved error reporting |
+| `mockery/mockery` | ^1.6 | Mocking library for tests |
 
-### JavaScript (npm)
+### JavaScript / Frontend (package.json)
 
-| Package | Version | Purpose |
-|---|---|---|
-| `tailwindcss` | ^3.1 | Utility-first CSS framework |
-| `alpinejs` | ^3.4 | Lightweight JS reactivity |
-| `vite` | ^8.0 | Frontend build tool |
-| `axios` | ^1.16 | HTTP requests |
-| `laravel-vite-plugin` | ^3.1 | Laravel + Vite integration |
+| Package | Purpose |
+|---------|---------|
+| `tailwindcss` | Utility-first CSS framework |
+| `vite` | Frontend build tool and dev server |
+| `@vitejs/plugin-laravel` | Vite + Laravel integration |
+| `postcss` | CSS transformation pipeline |
+| `autoprefixer` | Adds vendor prefixes to CSS |
+
+### System Requirements
+
+| Requirement | Version |
+|-------------|---------|
+| PHP | >= 8.3 |
+| Composer | >= 2.0 |
+| Node.js | >= 18.0 |
+| Database | MySQL 8+ / SQLite 3+ |
 
 ---
 
-## 🌐 Languages Used
+## 📸 6. Screenshots
 
-- **Blade** — 49.3% (templating)
-- **PHP** — 24.8% (backend logic)
-- **JavaScript** — 20.8% (frontend interactivity)
-- **CSS** — 5.1% (styling)
+> **Note:** Replace the placeholder sections below with actual screenshots of your running application.
+
+### Login Page
+```
+<img width="1213" height="880" alt="image" src="https://github.com/user-attachments/assets/36338b02-1a59-49f0-a8ef-b0c723d47569" />
+<img width="1175" height="880" alt="image" src="https://github.com/user-attachments/assets/0778cd20-60ba-4923-86d1-c7567e1eef89" />
+
+```
+*Secure login form with CSRF protection and input validation.*
+
+### Home / Car Listing Page
+```
+<img width="1618" height="707" alt="image" src="https://github.com/user-attachments/assets/29336cf8-8157-4701-b82e-43e3ee4aa03b" />
+```
+*Displays available cars with details, pricing, and availability status.*
+
+### Booking Form
+```
+<img width="1138" height="844" alt="image" src="https://github.com/user-attachments/assets/2a6aa74d-3062-463f-b084-48776089983f" />
+
+```
+*Validated booking form with date selection and car confirmation.*
+
+### Customer Dashboard
+```
+<img width="1627" height="904" alt="image" src="https://github.com/user-attachments/assets/793225c8-fcf0-4f5f-b3a9-595e2b5f0bbb" />
+
+```
+*Users can view, manage, and cancel their active bookings.*
+
+### Admin Dashboard
+```
+<img width="1618" height="438" alt="image" src="https://github.com/user-attachments/assets/816bbffb-7126-41cd-87d3-b81fdef28f24" />
+<img width="1581" height="881" alt="image" src="https://github.com/user-attachments/assets/e580f3bd-6f2f-4f97-a13c-b6b4bddd0e06" />
+<img width="1580" height="877" alt="image" src="https://github.com/user-attachments/assets/61e3db93-48df-4894-94c9-b6c568a5d813" />
+<img width="1590" height="877" alt="image" src="https://github.com/user-attachments/assets/27b44dd0-739a-42c8-a6e1-17bfab2a2e5c" />
+
+```
+*Admin can manage all cars, view all bookings, and handle user accounts.*
+
+---
+
+## 👥 Contributors
+
+| Name | Role |
+|------|------|
+| Muhammad Akid Taqiuddin bin Dzul Izzudin | Developer / Project Lead |
+| Khairul'Anam bin Mohammad Fairuze | Security Checker |
+| Muhammad Ammar Fadhli bin Noor Anim | GitHub Handler |
 
 ---
 
@@ -203,6 +281,4 @@ This project is open-sourced under the [MIT License](https://opensource.org/lice
 
 ---
 
-## 🙋 Contributing
-
-Contributions, issues and feature requests are welcome. Feel free to open a pull request or issue on [GitHub](https://github.com/muhammadakidtaqiuddin-coder/SSD-Website-Project).
+> **Course:** Secure Software Development (SSD) · Universiti Kuala Lumpur (UniKL)
