@@ -1,0 +1,1 @@
+This project was a success. It has been designed and assessed with a secure web application using Secure Software Development Framework (SSDF) principles, OWASP Top 10 recommendations and OWASP ASVS security requirements.
